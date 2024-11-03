@@ -2,7 +2,7 @@ inch = 25.4;
 
 wall = 1.6;
 board_x = 1*inch + 0.6;
-board_y = 2.3*inch + 0.6;
+board_y = 2.3*inch + 0.3;
 board_z = 15.2;
 board_standoff = 3.5;
 
@@ -13,7 +13,7 @@ case_x = board_x;
 case_y = board_y + wall + cable_compartment_y + wall + antipull_compartment_y;
 case_z = 25;
 
-bottom_y = 16.5;
+bottom_y = 16;
 
 rj45_back = 16.4;
 rj45_xlen = 16;
@@ -53,7 +53,7 @@ module case() {
 					cube([rj45_xlen, 3*wall, rj45_zlen], center=true);
 				
 				translate([case_x, 71, bottom_y/2]) rotate([0,90,0])
-					cylinder(3*wall, d=11.5, center=true);
+					cylinder(3*wall, d=11.33, center=true);
 			}
 			
 			translate([0, board_y-wall, 0]) cube([board_x, wall, board_standoff]);
@@ -70,7 +70,7 @@ module case() {
 
 module clip(l) {
 	clip_wall = 1;
-	clip_height = 5;
+	clip_height = 5.5;
 	
 	translate([0,l,bottom_y])
 	rotate([90,0,0])
@@ -124,12 +124,12 @@ module bottom() {
 		translate([-inf/2, -inf/2, bottom_y]) cube([inf, inf, inf]);
 	}
 	
-	clip_back(case_x / 2 - 8/2, 0);
-	clip_back(case_x / 2 - 8/2, case_x/2 + 8/2);
-	clip_front(case_x / 2 - rj45_xlen / 2, 0);
-	clip_front(case_x / 2 - rj45_xlen / 2, case_x / 2 + rj45_xlen / 2);
-	clip_left(15, 2);
-	clip_right(15, 2);
+	clip_back(case_x / 2 - 8/2, 1);
+	clip_back(case_x / 2 - 8/2, case_x/2 + 8/2 -1);
+	clip_front(case_x / 2 - rj45_xlen / 2 - 0.5, 0.5);
+	clip_front(case_x / 2 - rj45_xlen / 2 - 0.5, case_x / 2 + rj45_xlen / 2);
+	clip_left(12, 2);
+	clip_right(12, 2);
 	clip_left(15, case_y-15-2);
 	clip_right(7, case_y-7-2);
 }
