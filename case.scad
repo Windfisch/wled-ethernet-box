@@ -1,8 +1,8 @@
 inch = 25.4;
 
 wall = 1.6;
-board_x = 1*inch;
-board_y = 2.3*inch;
+board_x = 1*inch + 0.6;
+board_y = 2.3*inch + 0.6;
 board_z = 15.2;
 board_standoff = 3.5;
 
@@ -53,7 +53,7 @@ module case() {
 					cube([rj45_xlen, 3*wall, rj45_zlen], center=true);
 				
 				translate([case_x, 71, bottom_y/2]) rotate([0,90,0])
-					cylinder(3*wall, d=11, center=true);
+					cylinder(3*wall, d=11.5, center=true);
 			}
 			
 			translate([0, board_y-wall, 0]) cube([board_x, wall, board_standoff]);
@@ -62,9 +62,9 @@ module case() {
 			translate([0, case_y-antipull_compartment_y-wall, 0]) cube([board_x, wall, bottom_y-0.01]);
 		}
 		
-		cable_slot_zlen = 10;
-		translate([case_x/2 - 5/2,case_y-antipull_compartment_y-eps-wall, bottom_y - cable_slot_zlen+eps])
-			cube([5, antipull_compartment_y+2*wall+0.1, cable_slot_zlen]);
+		cable_slot_zlen = 7;
+		translate([case_x/2 - 4/2,case_y-antipull_compartment_y-eps-wall, bottom_y - cable_slot_zlen+eps])
+			cube([4, antipull_compartment_y+2*wall+0.1, cable_slot_zlen]);
 	}
 }
 
@@ -105,7 +105,17 @@ module top() {
 	intersection() {
 		case();
 		translate([-inf/2, -inf/2, bottom_y]) cube([inf, inf, inf]);
-	}	
+	}
+	holder_size = 10;
+	
+	holder_height = case_z - (board_standoff + rj45_zlen) +eps;
+	translate([case_x/2, rj45_back - holder_size/2, board_standoff + rj45_zlen ]) {
+		
+		translate([-wall/2, -holder_size/2,0])
+			cube([wall,holder_size,holder_height]);
+		translate([-holder_size/2, -wall/2,0])
+			cube([holder_size,wall,holder_height]);
+	}
 }
 
 module bottom() {
@@ -122,9 +132,7 @@ module bottom() {
 	clip_right(15, 2);
 	clip_left(15, case_y-15-2);
 	clip_right(7, case_y-7-2);
-	clip_right(10, case_y/2-10/2);
-	clip_left(10, case_y/2-10/2);
 }
 
-//top();
-bottom();
+rotate([180,0,0]) translate([5+3*wall+case_x,-wall - case_y,-wall - case_z])  top();
+translate([wall,wall,wall]) bottom();
