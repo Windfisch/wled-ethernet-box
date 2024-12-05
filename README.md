@@ -57,3 +57,7 @@ Go to LED settings, and configure two (or more) LED outputs on GPIO 4 and 5.
 Go to WiFi settings, scroll to the bottom and enable ethernet; configure the WT-ETH01 variant of ethernet.
 
 All your LEDs are belong to us!
+
+## License
+
+[WLED ethernet box](https://github.com/Windfisch/wled-ethernet-box) by [Florian Jung](https://github.com/Windfisch) is licensed under [CC BY-SA 4.0![](https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1)![](https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1)![](https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1)](https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1)
